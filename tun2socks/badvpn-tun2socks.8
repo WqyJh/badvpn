@@ -20,6 +20,8 @@ badvpn-tun2socks
 .br
   [\fB\-\-tundev\fR <name>]
 .br
+  [\fB\-\-tunfd\fR <mtu> <sock-path>]
+.br
   \fB\-\-netif\-ipaddr\fR <ipaddr>
 .br
   \fB\-\-netif\-netmask\fR <ipnetmask>
@@ -66,6 +68,14 @@ Now start the badvpn-tun2socks program:
 
 .nf
   badvpn-tun2socks --tundev tun0 --netif-ipaddr 10.0.0.2 --netif-netmask 255.255.255.0 \\
+                   --socks-server-addr 127.0.0.1:1080
+.fi
+
+If you don't know the name of the tun device or you cannot open the tun device by name,
+you can pass the file descriptor through a unix socket and specify the mtu of the tun device:
+
+.nf
+  badvpn-tun2socks --tunfd 1500 /path/to/unix_sock --netif-ipaddr 10.0.0.2 --netif-netmask 255.255.255.0 \\
                    --socks-server-addr 127.0.0.1:1080
 .fi
 
